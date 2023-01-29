@@ -1,0 +1,216 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Dashboard | Capture Glow</title>
+		<!-- CSS only -->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+			crossorigin="anonymous"
+		/>
+		<style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@100;400&display=swap');
+            .center { position: absolute; top: 50%; left: 50%; margin-right: -50%;
+			transform: translate(-50%, -50%); padding-left: 200px; width: 983px; }
+            
+            html, body {
+                height: 100%;
+                width: 100%;
+                margin: 0;
+                font-family: Inter, sans-serif;
+                font-weight: 700;
+            }
+
+            .dashboard {
+                display: flex;
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .sidebar {
+                background-color: #E9F8E3;
+                width: 20%;
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                height: 100%;
+                z-index: 1;
+            }
+
+            .logo {
+                margin: 20px auto;
+            }
+             
+            .logo img{
+                width: 150px;
+                height: 150px;
+            }
+
+            .menu {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .menu-item {
+                display: flex;
+                justify-content: flex-start;
+                margin: 0 40px;
+            }
+
+            .menu p {
+                font-style: normal;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 48px;
+                letter-spacing: 0.2px;
+                text-transform: capitalize;
+                margin: 0 0 0 13px;
+            }
+        
+            .main {
+                position: fixed;
+                display: flex;
+                flex-direction: column;
+                width: 80%;
+                padding-left: 25%;
+                width: 100%;
+  	            height: 100%;
+            }
+
+            .heading {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                margin: 100px 5px 0px 5px;
+            
+            }
+
+            .heading p {
+                font-size: 28px;;
+                letter-spacing: -0.5px;
+                color: #000000;
+            }
+
+            .opaque {
+                opacity: 0.4;
+            }
+
+            .right {
+                display: flex;
+                justify-content: space-between;
+                width: 12.25rem
+            }
+
+            .right p {
+                margin: auto 0;
+            }
+
+            .button {
+                border: none;
+                text-align: center;
+                border-radius: 8px;
+            }
+
+            .button-purple {
+                margin: auto 0;
+                padding: 5px;
+                font-size: 15px;
+                line-height: 25px;
+                width:8.75rem;
+
+                background-color: #AEDEC7;
+                color: #333634;
+                border: none;
+            }
+
+            .button-red {
+                background: red;
+                
+            }            
+
+            a {
+                text-decoration: none;
+                color: #000;
+            }
+
+            a:hover {
+                color: #000;
+            }
+
+            .input {
+                background-color: #E9F8E3;
+                border: none;
+            }
+
+            .button {
+                background-color: #AEDEC7;
+                color: #333634;
+                border: none;
+            }
+            
+
+		</style>
+	</head>
+	<body>
+		<div class="dashboard">
+            <div class="sidebar">
+                <div class="logo">
+                    <img src="logo.png" alt="logo">
+                </div>
+
+                <div class="menu opaque">
+                    <div class="menu-item">
+                        <p><a href="/dashboard">Dashboard</a></p>
+                    </div>
+                </div>
+                <div class="menu">
+                    <div class="menu-item">
+                        <p><a href="/agents">Agents</a></p>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="main">
+                <div class="heading">
+                    <p>Create Agents</p>
+                    <div class="right">
+                        <button class="button button-purple"><a href="/logout">Logout</a></button>
+                    </div>
+                </div>
+
+                <div class="center">
+                    <form id="form" action="/agents" method="post">
+					<h1 class="h3 mb-4 fw-normal text-center">New Agent</h1>
+					{{#if message}}
+  						<span id="message" class="alert alert-danger" role="alert" style="display: inline-block; ">{{message}}</span>
+					{{/if}}
+					<span id="message" class="alert alert-danger" role="alert" style="display: none; ">erroror</span>
+					<div class="input-group mb-3 has-validation">
+						<input type="text" class="input form-control rounded-pill" name="firstname" placeholder="Firstname" required />
+					</div>
+                    <div class="input-group mb-3 has-validation">
+                        <input type="text" class="input form-control rounded-pill" name="lastname" placeholder="Lastname" required />
+					</div>
+                    <div class="input-group mb-3 col-3 has-validation">
+                        <input type="email" class="input form-control rounded-pill" name="email" placeholder="Email" required />
+					</div>
+                    <div class="d-grid gap- col-3 mx-auto">
+						<button id="btn" class="btn btn-primary rounded-pill button" type="submit">Create</button>
+					</div>
+				</form>
+                    </div>
+                </div>
+            </div>
+        </div>
+		<!-- JavaScript Bundle with Popper -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
